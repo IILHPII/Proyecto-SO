@@ -1,0 +1,2 @@
+Codigo |   CI   | Fecha Ini  |  Fecha Fin |TimeStamp | Usuario 
+10556 : 55822124 : 2022/03/04 : 2022/04/05 : 22/10/31 : leandro
