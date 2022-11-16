@@ -18,8 +18,16 @@ counter=`echo $(($RANDOM))`
         do
 
         read -p "Ingrese cedula: " cedula
-           
-           
+        
+        buscoDocente=$(grep "^$cedula:" lista.txt | cut -d: -f2)
+
+        if grep -q "^$cedula:" lista.txt ; then
+            echo Cedula valida,pertenece al docente $buscoDocente
+           else 
+            echo Cedula no registrada en el sistema,primero debe dar de alta al profesor
+            break;
+        fi
+
         echo "Ingrese fecha que inicio inasistencia"
         read -p "Ingrese la fecha en formato [yyyyMMdd]: " fechaInicio
 
@@ -55,9 +63,12 @@ counter=`echo $(($RANDOM))`
         else 
             ci_authenticator=false
         fi
+
            
         #Validador general   
-        if [ $fin_authenticator = true ] && [ $inicio_authenticator = true ] && [ $ci_authenticator = true ]; then 
+        if [ $fin_authenticator = true ] && [ $inicio_authenticator = true ] && [ $ci_authenticator = true ] && [[  $fechaInicioCompleta < $fechaFinCompleta || $fechaInicioCompleta == $fechaFinCompleta ]] ; then 
+            echo $counter":"$cedula":"$fechaInicioCompleta":"$fechaFinCompleta":"$fecha":"$user >>faltas.txt
+            echo Tu codigo es: $counter  guardalo para consultar tus datos de la inasistencia
             break;
         else 
             echo Datos no validos, verifique que ingreso mal en el siguiente panel de texto: 
@@ -65,7 +76,3 @@ counter=`echo $(($RANDOM))`
         fi
             
     done
-
-
-        echo $counter":"$cedula":"$fechaInicioCompleta":"$fechaFinCompleta":"$fecha":"$user >>lista.txt
-        echo Tu codigo es: $counter  guardalo para consultar tus datos de la inasistencia

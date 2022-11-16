@@ -8,12 +8,12 @@
  echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>" 
 
  read -p "Ingrese numero de ticket a buscar: " ticket
-    if grep -q "^$ticket:" lista.txt
+    if grep -q "^$ticket:" faltas.txt
     then
-        grep "^$ticket:" lista.txt>>bajas.txt
+        grep "^$ticket:" faltas.txt>>bajas.txt
         echo "La falta que ha sido borrada es: " $( grep "^$ticket:" lista.txt )
       
-      grep -v "^$ticket:" lista.txt > temp
+      grep -v "^$ticket:" faltas.txt > temp
       mv temp lista.txt
     else
     echo No existe el registro.
