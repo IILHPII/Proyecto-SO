@@ -1,5 +1,10 @@
 #!/bin/bash
-clear 
+ clear 
+
+    echo    ▄▀█ █░░ ▀█▀ ▄▀█   █▀▄ █▀▀   █▀▄ █▀█ █▀▀ █▀▀ █▄░█ ▀█▀ █▀▀
+    echo    █▀█ █▄▄ ░█░ █▀█   █▄▀ ██▄   █▄▀ █▄█ █▄▄ ██▄ █░▀█ ░█░ ██▄
+    echo
+
 
 #Variables utiles
 validate_entrada_ci='^[0-9]+$'

@@ -1,9 +1,14 @@
 #!/bin/bash
+  clear
 
-      #Variables utiles
-      validate_entrada_ci='^[0-9]+$'
-      let resultDay
+   echo   █▀▀ █▀█ █▄░█ █▀ █░█ █░░ ▀█▀ ▄▀█ █▀   █▀▀ █▀▀ █▄░█ █▀▀ █▀█ ▄▀█ █░░ █▀▀ █▀
+   echo   █▄▄ █▄█ █░▀█ ▄█ █▄█ █▄▄ ░█░ █▀█ ▄█   █▄█ ██▄ █░▀█ ██▄ █▀▄ █▀█ █▄▄ ██▄ ▄█
 
+
+    #Variables utiles
+    validate_entrada_ci='^[0-9]+$'
+    let resultDay
+    echo 
     echo "Bienvenido a las consultas"
     echo "1) Cantidad de avisos en un mes de determinado docente"
     echo "2) Total de faltas de un determinado profesor"
