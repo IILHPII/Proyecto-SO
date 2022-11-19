@@ -35,10 +35,9 @@
           echo "Cedula no encontrada en registro de faltas"
         fi
         ;;
-    2) read -p "Ingrese cedula a continuacion: " cedula 
+    2) 
+      read -p "Ingrese cedula a continuacion: " cedula 
       
-      if grep -q ":$cedula:" faltas.txt ; then
-         
          for y in $(grep ":$cedula:" faltas.txt | cut -d: -f3 ) 
          do
           let iniDate+=$(date -d"$y" +%s)
@@ -52,16 +51,12 @@
             let resultUnix=$finDate-$iniDate
 
             if [[ $resultUnix == 0 ]]; then
-               result=1
-               echo "El total de dias que falto el profesor es:" $result
-               else 
+               resultado=1
+              echo "El total de faltas es: " $resultado
+              else
                let endResult=$resultUnix/86400
-               echo "El total de dias que falto el profesor es:" $endResult
-            fi
-
-          else
-            echo "Cedula no encontrada en el registro de faltas"
-      fi      
+               echo "El total de faltas es: " $endResult
+            fi   
             ;;
     3)  read -p "Ingrese cedula a continuacion: " cedula 
         if grep -q ":$cedula:" faltas.txt ; then 
