@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Variables utiles
-fecha=$(date +%y/%m/%d)
+fecha=$(date +%Y/%m/%d)
 user=$USER
 validate_entrada_ci='^[0-9]+$'
 validate_entrada_fecha='^(19[0-9]{2}|20[0-9]{2})(0[1-9]|10|11|12)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$'
