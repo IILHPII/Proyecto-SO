@@ -37,8 +37,9 @@
         ;;
     2) 
       read -p "Ingrese cedula a continuacion: " cedula 
-      
-         for y in $(grep ":$cedula:" faltas.txt | cut -d: -f3 ) 
+        if grep -q ":$cedula:" faltas.txt ; then 
+        
+        for y in $(grep ":$cedula:" faltas.txt | cut -d: -f3 ) 
          do
           let iniDate+=$(date -d"$y" +%s)
          done
@@ -56,7 +57,11 @@
               else
                let endResult=$resultUnix/86400
                echo "El total de faltas es: " $endResult
-            fi   
+            fi
+
+          else
+           echo "Cedula no encontrada en el registros de faltas" 
+        fi
             ;;
     3)  read -p "Ingrese cedula a continuacion: " cedula 
         if grep -q ":$cedula:" faltas.txt ; then 
