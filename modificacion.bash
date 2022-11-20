@@ -67,7 +67,7 @@
                sed -i ${lineaTicket}' s:'${fechaInicioVieja}':'${fechaInicioCompleta}':' faltas.txt
                sed -i ${lineaTicket}' s:'${fechaFinVieja}':'${fechaFinCompleta}':' faltas.txt
                echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaInicioVieja "por la fecha "$fechaInicioCompleta "del docente "$cedula >>registros.log
-               echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaFinVieja "por la fecha "$fechaFinCompleta "del docente "$cedula >>registros.log
+               echo $fecha":""El usuario "$usuario "cambio la fecha de fin "$fechaFinVieja "por la fecha "$fechaFinCompleta "del docente "$cedula >>registros.log
                break;
                else 
                 echo "Ingreso invalido, intente nuevamente."
