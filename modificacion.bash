@@ -13,7 +13,7 @@
     validate_entrada_ci='^[0-9]+$'
     usuario=$USER
     fecha=$(date +%Y/%m/%d)
-    uno=1
+    lineaTicket=$(grep -n "^$ticket:" faltas.txt | cut -d: -f1)
 
     if grep -q "^$ticket:" faltas.txt
     then
@@ -31,7 +31,6 @@
                read -p "Ingrese la nueva CI: " reemplazoci
             if grep -q "$reemplazoci" lista.txt ; then
                 if [[ $reemplazoci =~ $validate_entrada_ci ]] ; then
-                lineaTicket=$(grep -n "^$ticket:" faltas.txt | cut -d: -f1)
                 sed -i ${lineaTicket}' s/'${cedula}'/'${reemplazoci}'/' faltas.txt
                 echo $fecha":""El usuario" $usuario "cambio la cedula" $cedula "por la cedula " $reemplazoci >>registros.log
                 echo $lineaTicket
@@ -65,8 +64,8 @@
                fi 
 
                if [[  $fechaInicioCompleta < $fechaFinCompleta || $fechaInicioCompleta == $fechaFinCompleta ]] ; then
-               sed -i "${lineaTicket} s,${fechaInicioVieja},${fechaInicioCompleta}," faltas.txt
-               sed -i "${lineaTicket} s,${fechaFinVieja},${fechaFinCompleta}," faltas.txt
+               sed -i ${lineaTicket}' s:'${fechaInicioVieja}':'${fechaInicioCompleta}':' faltas.txt
+               sed -i ${lineaTicket}' s:'${fechaFinVieja}':'${fechaFinCompleta}':' faltas.txt
                echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaInicioVieja "por la fecha "$fechaInicioCompleta "del docente "$cedula >>registros.log
                echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaFinVieja "por la fecha "$fechaFinCompleta "del docente "$cedula >>registros.log
                break;
