@@ -78,6 +78,10 @@
        
         else 
         echo "Ticket inexistente"
+        sleep 2
+        echo "Saliendo al menu principal"
+        sleep 5
+        break
         fi        
     done      
 

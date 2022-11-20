@@ -75,7 +75,7 @@
          ;;
     4) read -p "Ingrese nombre del usuario que registro la falta:" nombre
        read -p "Ingrese el mes que el desea buscar la cantidad de registros en formato [mm]:" mes
-      if grep -q "$nombre:" faltas.txt ; then 
+      if grep -q ":$nombre" faltas.txt ; then 
        for xx in $(grep ":$nombre" faltas.txt | cut -d: -f5)
         do
           buscoMes=$(date -d "$xx" +%m)
