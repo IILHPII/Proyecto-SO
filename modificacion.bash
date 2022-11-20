@@ -4,6 +4,7 @@
     echo  █▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ ▄▀█ █▀▀ █ █▀█ █▄░█   █▀▄ █▀▀   █▀▄ ▄▀█ ▀█▀ █▀█ █▀
     echo  █░▀░█ █▄█ █▄▀ █ █▀░ █ █▄▄ █▀█ █▄▄ █ █▄█ █░▀█   █▄▀ ██▄   █▄▀ █▀█ ░█░ █▄█ ▄█ 
     echo 
+    
     read -p "Ingrese numero de ticket a buscar: " ticket
 
     cedula=$(grep "^$ticket:" faltas.txt | cut -d ":" -f2)
@@ -16,10 +17,12 @@
     lineaTicket=$(grep -n "^$ticket:" faltas.txt | cut -d: -f1)
     fechaLog=$(date +"%D %T")
 
-    if grep -q "^$ticket:" faltas.txt
-    then
     while :
     do  
+
+    if grep -q "^$ticket:" faltas.txt
+    then
+    
         echo "Datos obtenidos del ticket:" $ticket
         (echo CI:Fecha Inicio:Fecha Fin; cat faltas.txt | grep "^$ticket:" | cut -d: -f 2,3,4 ) | column -t -s:
         echo "1: Numero de cedula"
@@ -35,8 +38,6 @@
                 sed -i ${lineaTicket}' s/'${cedula}'/'${reemplazoci}'/' faltas.txt
                 echo $fechaLog"-""El usuario" $usuario "cambio la cedula" $cedula "por la cedula " $reemplazoci >>registros.log
                 echo $lineaTicket
-                sleep 5
-                break;
                 else
                 echo "Ingreso invalido, intente nuevamente."
                 fi
@@ -69,19 +70,15 @@
                sed -i ${lineaTicket}' s:'${fechaFinVieja}':'${fechaFinCompleta}':' faltas.txt
                echo $fechaLog"-""El usuario "$usuario "cambio la fecha de inicio "$fechaInicioVieja "por la fecha "$fechaInicioCompleta "del docente "$cedula >>registros.log
                echo $fechaLog"-""El usuario "$usuario "cambio la fecha de fin "$fechaFinVieja "por la fecha "$fechaFinCompleta "del docente "$cedula >>registros.log
-               break;
                else 
                 echo "Ingreso invalido, intente nuevamente."
                fi;;
-
-            3) echo fecha de fin;;
-            4) break;;
+            3) break;;
         esac
-    done  
        
-    else 
+        else 
         echo "Ticket inexistente"
-    fi        
-
+        fi        
+    done      
 
     
