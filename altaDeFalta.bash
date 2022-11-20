@@ -70,10 +70,13 @@ counter=`echo $(($RANDOM))`
         if [ $fin_authenticator = true ] && [ $inicio_authenticator = true ] && [ $ci_authenticator = true ] && [[  $fechaInicioCompleta < $fechaFinCompleta || $fechaInicioCompleta == $fechaFinCompleta ]] ; then 
             echo $counter":"$cedula":"$fechaInicioCompleta":"$fechaFinCompleta":"$fecha":"$user >>faltas.txt
             echo Tu codigo es: $counter  guardalo para consultar tus datos de la inasistencia
+            echo $fecha":""El usuario" $user "creo registro de falta del docente " $buscoDocente "con la cedula " $cedula "con la fecha de inicio " $fechaInicioCompleta " y la fecha de fin" $fechaFinCompleta  >>registros.log
+            sleep 5
             break;
         else 
             echo Datos no validos, verifique que ingreso mal en el siguiente panel de texto: 
-            echo "Cedula:" $cedula "|" "Fecha de fin: "$fechaFin "|" "Fecha de inicio: "$fechaInicio     
+            echo "Cedula:" $cedula "|" "Fecha de fin: "$fechaFin "|" "Fecha de inicio: "$fechaInicio   
+            echo
         fi
             
     done

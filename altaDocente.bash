@@ -10,6 +10,8 @@
 validate_entrada_ci='^[0-9]+$'
 validate_entrada_nombre='^[A-Za-zÁÉÍÓÚáéíóú0-9]+$'
 comparadorCedula=$(grep "^$cedula:" lista.txt | cut -d: -f1)
+usuario=$USER
+fecha=$(date +%Y/%m/%d)
 
 while :
     do
@@ -23,6 +25,7 @@ while :
             guardarCi="$cedula"
         else 
             echo La cedula ingresada es invalida.
+            sleep 5
             break; 
     fi
     
@@ -31,6 +34,7 @@ while :
     if   grep -q "^$cedula:" lista.txt  ; then
          echo Cedula ya existente en el sistema
          (echo CI:Nombre; cat lista.txt | grep "^$cedula:" | cut -d: -f 1,2 ) | column -t -s:
+         sleep 5
          break
         else 
          echo Cedula no existente en el sistema, puede continuar.
@@ -50,6 +54,10 @@ while :
             echo $guardarCi":"$guardarNombre >>lista.txt
             echo "Los datos guardados son: "
             (echo CI:Nombre; cat lista.txt | grep "^$cedula:" | cut -d: -f 1,2 ) | column -t -s:
+            echo $fecha":""El usuario" $usuario "dio de alta al docente " $guardarNombre "con la cedula " $guardarCi >>registros.log
+            sleep 2
+            echo Cerrando aplicacion de registros en 5 segundos!
+            sleep 5
             break;
         else
             echo Intente el registro nuevamente.

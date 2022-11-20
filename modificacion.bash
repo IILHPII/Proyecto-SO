@@ -10,8 +10,10 @@
     validate_entrada_fecha='^(19[0-9]{2}|20[0-9]{2})(0[1-9]|10|11|12)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$'
     fechaFinVieja=$(grep "^$ticket:" faltas.txt | cut -d ":" -f4)
     fechaInicioVieja=$(grep "^$ticket:" faltas.txt | cut -d ":" -f3)
-    lineaTicket=$(grep -n "^$ticket:" faltas.txt | cut -d: -f1)
     validate_entrada_ci='^[0-9]+$'
+    usuario=$USER
+    fecha=$(date +%Y/%m/%d)
+    uno=1
 
     if grep -q "^$ticket:" faltas.txt
     then
@@ -27,13 +29,21 @@
         case $ingreso in 
             1) 
                read -p "Ingrese la nueva CI: " reemplazoci
-               
-               if [[ $reemplazoci =~ $validate_entrada_ci ]] ; then
-                sed -i '/'${lineaTicket}'/ s/'${cedula}'/'${reemplazoci}'/' faltas.txt
+            if grep -q "$reemplazoci" lista.txt ; then
+                if [[ $reemplazoci =~ $validate_entrada_ci ]] ; then
+                lineaTicket=$(grep -n "^$ticket:" faltas.txt | cut -d: -f1)
+                sed -i ${lineaTicket}' s/'${cedula}'/'${reemplazoci}'/' faltas.txt
+                echo $fecha":""El usuario" $usuario "cambio la cedula" $cedula "por la cedula " $reemplazoci >>registros.log
+                echo $lineaTicket
+                sleep 5
                 break;
-               else
+                else
                 echo "Ingreso invalido, intente nuevamente."
-               fi ;;
+                fi
+               else
+                echo "Cedula a reemplazar no encontrada en el sistema"
+            fi   
+               ;;
             2) 
                read -p "Ingrese la nueva fecha de inicio en formato [yyyyMMdd]:" fechaInicio
                if [[ $fechaInicio =~ $validate_entrada_fecha ]]; then 
@@ -57,6 +67,8 @@
                if [[  $fechaInicioCompleta < $fechaFinCompleta || $fechaInicioCompleta == $fechaFinCompleta ]] ; then
                sed -i "${lineaTicket} s,${fechaInicioVieja},${fechaInicioCompleta}," faltas.txt
                sed -i "${lineaTicket} s,${fechaFinVieja},${fechaFinCompleta}," faltas.txt
+               echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaInicioVieja "por la fecha "$fechaInicioCompleta "del docente "$cedula >>registros.log
+               echo $fecha":""El usuario "$usuario "cambio la fecha de inicio "$fechaFinVieja "por la fecha "$fechaFinCompleta "del docente "$cedula >>registros.log
                break;
                else 
                 echo "Ingreso invalido, intente nuevamente."
