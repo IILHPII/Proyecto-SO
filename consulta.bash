@@ -8,12 +8,15 @@
     #Variables utiles
     validate_entrada_ci='^[0-9]+$'
     let resultDay
+  while :
+  do
     echo 
     echo "Bienvenido a las consultas"
     echo "1) Cantidad de avisos en un mes de determinado docente"
     echo "2) Total de faltas de un determinado profesor"
     echo "3) Listado de ausencias de un determinado profesor"
     echo "4) Cantidad de registros de un determinado usuario en un mes"
+    echo "5) Salir de consultas"
     read -p "Opcion: " opcion
 
     case $opcion in
@@ -87,4 +90,7 @@
          echo "Usuario no encontrado en el registro de faltas"
       fi   
       ;;
+    5) break
+    ;;  
     esac
+  done

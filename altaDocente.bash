@@ -6,14 +6,14 @@
     echo
 
 
-#Variables utiles
-validate_entrada_ci='^[0-9]+$'
-validate_entrada_nombre='^[A-Za-zÁÉÍÓÚáéíóú0-9]+$'
-comparadorCedula=$(grep "^$cedula:" lista.txt | cut -d: -f1)
-usuario=$USER
-fecha=$(date +%Y/%m/%d)
+ #Variables utiles
+ validate_entrada_ci='^[0-9]+$'
+ validate_entrada_nombre='^[A-Za-zÁÉÍÓÚáéíóú0-9]+$'
+ comparadorCedula=$(grep "^$cedula:" lista.txt | cut -d: -f1)
+ usuario=$USER
+ fechaLog=$(date +"%D %T")
 
-while :
+ while :
     do
 
     read -p "Ingrese la cedula a registrar: " cedula
@@ -54,7 +54,7 @@ while :
             echo $guardarCi":"$guardarNombre >>lista.txt
             echo "Los datos guardados son: "
             (echo CI:Nombre; cat lista.txt | grep "^$cedula:" | cut -d: -f 1,2 ) | column -t -s:
-            echo $fecha":""El usuario" $usuario "dio de alta al docente " $guardarNombre "con la cedula " $guardarCi >>registros.log
+            echo $fechaLog"-""El usuario" $usuario "dio de alta al docente " $guardarNombre "con la cedula " $guardarCi >>registros.log
             sleep 2
             echo Cerrando aplicacion de registros en 5 segundos!
             sleep 5
@@ -63,5 +63,5 @@ while :
             echo Intente el registro nuevamente.
     fi
         
-done
+ done
 

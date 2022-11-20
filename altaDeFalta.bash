@@ -2,6 +2,7 @@
 
 #Variables utiles
 fecha=$(date +%Y/%m/%d)
+fechaLog=$(date +"%D %T")
 user=$USER
 validate_entrada_ci='^[0-9]+$'
 validate_entrada_fecha='^(19[0-9]{2}|20[0-9]{2})(0[1-9]|10|11|12)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$'
@@ -70,7 +71,8 @@ counter=`echo $(($RANDOM))`
         if [ $fin_authenticator = true ] && [ $inicio_authenticator = true ] && [ $ci_authenticator = true ] && [[  $fechaInicioCompleta < $fechaFinCompleta || $fechaInicioCompleta == $fechaFinCompleta ]] ; then 
             echo $counter":"$cedula":"$fechaInicioCompleta":"$fechaFinCompleta":"$fecha":"$user >>faltas.txt
             echo Tu codigo es: $counter  guardalo para consultar tus datos de la inasistencia
-            echo $fecha":""El usuario" $user "creo registro de falta del docente " $buscoDocente "con la cedula " $cedula "con la fecha de inicio " $fechaInicioCompleta " y la fecha de fin" $fechaFinCompleta  >>registros.log
+            echo $fechaLog"-""El usuario" $user "creo registro de falta del docente " $buscoDocente "con la cedula " $cedula "con la fecha de inicio " $fechaInicioCompleta " y la fecha de fin" $fechaFinCompleta  >>registros.log
+            echo Cerrando aplicacion de registros en 5 segundos!
             sleep 5
             break;
         else 
