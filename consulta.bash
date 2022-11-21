@@ -30,13 +30,14 @@
           if [[ $buscoMes == $mes ]]; then
             let registros++
           else
-            echo "No existen faltas en el mes " $mes 
+            registros=0
           fi 
         done  
         echo "La cantidad de registros en el mes " $mes "es de" $registros
           else 
           echo "Cedula no encontrada en registro de faltas"
         fi
+        registros=0
         ;;
     2) 
       read -p "Ingrese cedula a continuacion: " cedula 
@@ -65,6 +66,8 @@
           else
            echo "Cedula no encontrada en el registros de faltas" 
         fi
+        resultUnix=0
+        endResult=0
             ;;
     3)  read -p "Ingrese cedula a continuacion: " cedula 
         if grep -q ":$cedula:" faltas.txt ; then 
@@ -89,6 +92,7 @@
          else
          echo "Usuario no encontrado en el registro de faltas"
       fi   
+      registros=0
       ;;
     5) break
     ;;  

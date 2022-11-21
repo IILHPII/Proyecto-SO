@@ -17,7 +17,9 @@
     read -p "Ingrese seleccion del menu: " menu
     
    if [[ $menu == "--help" ]]; then
-    echo "Ayuda!"
+      bash ayuda.bash
+      elif [[ $menu == "--log" ]]; then
+      bash verLog.bash
       else 
        case $menu in
 
