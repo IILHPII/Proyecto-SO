@@ -16,7 +16,8 @@
     echo "2) Total de faltas de un determinado profesor"
     echo "3) Listado de ausencias de un determinado profesor"
     echo "4) Cantidad de registros de un determinado usuario en un mes"
-    echo "5) Salir de consultas"
+    echo "5) Consultar lista de profesores"
+    echo "6) Salir de consultas"
     read -p "Opcion: " opcion
 
     case $opcion in
@@ -94,7 +95,10 @@
       fi   
       registros=0
       ;;
-    5) break
+    5)
+      (echo CI:Nombre; cat lista.txt |  cut -d: -f1,2) | column -t -s:
+    ;;
+    6) break
     ;;  
     esac
   done
